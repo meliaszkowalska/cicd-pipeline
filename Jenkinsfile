@@ -38,14 +38,15 @@ pipeline {
     stage('docker push') {
       steps {
         script {
-          docker.build("${registry}:latest")
+          ocker.withRegistry('','dockerhub_id'){
+            docker.image("${registry}:${env.BUILD_NUMBER}").push()}
+          }
+
         }
-
       }
-    }
 
+    }
+    environment {
+      registry = 'meliaszkowalska/mek_docker'
+    }
   }
-  environment {
-    registry = 'meliaszkowalska/mek_docker'
-  }
-}
