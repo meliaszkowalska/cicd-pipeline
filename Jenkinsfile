@@ -38,7 +38,7 @@ pipeline {
     stage('docker push') {
       steps {
         script {
-          ocker.withRegistry('','dockerhub_id'){
+          docker.withRegistry('','dockerhub_id'){
             docker.image("${registry}:${env.BUILD_NUMBER}").push()}
           }
 
